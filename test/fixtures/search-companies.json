@@ -1,0 +1,42 @@
+{
+  "kind": "search#companies",
+  "total_results": 2,
+  "items_per_page": 20,
+  "start_index": 0,
+  "items": [
+    {
+      "kind": "searchresults#company",
+      "company_number": "00445790",
+      "title": "TESCO PLC",
+      "company_status": "active",
+      "company_type": "plc",
+      "date_of_creation": "1947-11-27",
+      "address_snippet": "Tesco House, Shire Park, Kestrel Way, Welwyn Garden City, Hertfordshire, AL7 1GA",
+      "address": {
+        "locality": "Welwyn Garden City",
+        "postal_code": "AL7 1GA",
+        "region": "Hertfordshire"
+      },
+      "description": "00445790 - Incorporated on 27 November 1947",
+      "description_identifier": ["incorporated-on"],
+      "links": { "self": "/company/00445790" },
+      "matches": { "title": [1, 5], "snippet": [] }
+    },
+    {
+      "kind": "searchresults#company",
+      "company_number": "03978023",
+      "title": "TESCO STORES LIMITED",
+      "company_status": "active",
+      "company_type": "ltd",
+      "date_of_creation": "2000-04-12",
+      "address_snippet": "Tesco House, Shire Park, Kestrel Way, Welwyn Garden City, AL7 1GA",
+      "address": {
+        "locality": "Welwyn Garden City",
+        "postal_code": "AL7 1GA"
+      },
+      "description": "03978023 - Incorporated on 12 April 2000",
+      "description_identifier": ["incorporated-on"],
+      "links": { "self": "/company/03978023" }
+    }
+  ]
+}

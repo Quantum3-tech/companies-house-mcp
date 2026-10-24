@@ -1,0 +1,34 @@
+{
+  "company_number": "00445790",
+  "company_name": "TESCO PLC",
+  "company_status": "active",
+  "type": "plc",
+  "date_of_creation": "1947-11-27",
+  "jurisdiction": "england-wales",
+  "has_charges": true,
+  "has_insolvency_history": false,
+  "can_file": true,
+  "etag": "a1b2c3d4e5f6",
+  "sic_codes": ["47110", "70100"],
+  "registered_office_address": {
+    "address_line_1": "Tesco House",
+    "address_line_2": "Shire Park, Kestrel Way",
+    "locality": "Welwyn Garden City",
+    "region": "Hertfordshire",
+    "postal_code": "AL7 1GA",
+    "country": "England",
+    "premises": "Tesco House"
+  },
+  "accounts": {
+    "next_due": "2024-11-23",
+    "next_made_up_to": "2024-02-24",
+    "overdue": false,
+    "accounting_reference_date": { "day": "24", "month": "02" },
+    "next_accounts": {
+      "due_on": "2024-11-23",
+      "overdue": false,
+      "period_end_on": "2024-02-24"
+    }
+  },
+  "links": { "self": "/company/00445790" }
+}

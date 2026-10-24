@@ -1,0 +1,42 @@
+{
+  "kind": "officer-list",
+  "active_count": 2,
+  "resigned_count": 1,
+  "total_results": 3,
+  "items_per_page": 35,
+  "start_index": 0,
+  "etag": "f6e5d4c3b2a1",
+  "items": [
+    {
+      "name": "SMITH, Jane Elizabeth",
+      "officer_role": "director",
+      "appointed_on": "2015-06-01",
+      "nationality": "British",
+      "occupation": "Company Director",
+      "country_of_residence": "England",
+      "date_of_birth": { "month": 4, "year": 1970 },
+      "address": {
+        "locality": "Welwyn Garden City",
+        "postal_code": "AL7 1GA"
+      },
+      "links": { "self": "/company/00445790/appointments/abc123" }
+    },
+    {
+      "name": "JONES, David",
+      "officer_role": "secretary",
+      "appointed_on": "2018-01-15",
+      "occupation": "Solicitor",
+      "address": { "locality": "London" }
+    },
+    {
+      "name": "BROWN, Michael",
+      "officer_role": "director",
+      "appointed_on": "2010-03-01",
+      "resigned_on": "2014-09-30",
+      "nationality": "British",
+      "occupation": "Accountant",
+      "country_of_residence": "England",
+      "date_of_birth": { "month": 11, "year": 1965 }
+    }
+  ]
+}

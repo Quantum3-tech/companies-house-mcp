@@ -1,0 +1,36 @@
+{
+  "filing_history_status": "filing-history-available",
+  "total_count": 3,
+  "items_per_page": 25,
+  "start_index": 0,
+  "etag": "0011223344",
+  "items": [
+    {
+      "transaction_id": "MzM4OTk5OTk5OWFkaXF6a2N4",
+      "category": "accounts",
+      "date": "2023-11-20",
+      "type": "AA",
+      "description": "accounts-with-accounts-type-full",
+      "description_values": { "made_up_date": "2023-02-25" },
+      "pages": 48,
+      "paper_filed": false,
+      "links": { "self": "/company/00445790/filing-history/MzM4OTk5OTk5OWFkaXF6a2N4" }
+    },
+    {
+      "transaction_id": "MzM3MDAwMDAwMGFkaXF6a2N4",
+      "category": "confirmation-statement",
+      "date": "2023-06-14",
+      "type": "CS01",
+      "description": "confirmation-statement-with-updates",
+      "pages": 4
+    },
+    {
+      "transaction_id": "MzM1MDAwMDAwMGFkaXF6a2N4",
+      "category": "officers",
+      "date": "2022-10-03",
+      "type": "AP01",
+      "description": "some-code-not-in-our-table",
+      "paper_filed": true
+    }
+  ]
+}
