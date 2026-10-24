@@ -1,34 +1,43 @@
 {
-  "company_number": "00445790",
-  "company_name": "TESCO PLC",
-  "company_status": "active",
-  "type": "plc",
-  "date_of_creation": "1947-11-27",
-  "jurisdiction": "england-wales",
-  "has_charges": true,
-  "has_insolvency_history": false,
-  "can_file": true,
-  "etag": "a1b2c3d4e5f6",
-  "sic_codes": ["47110", "70100"],
-  "registered_office_address": {
-    "address_line_1": "Tesco House",
-    "address_line_2": "Shire Park, Kestrel Way",
-    "locality": "Welwyn Garden City",
-    "region": "Hertfordshire",
-    "postal_code": "AL7 1GA",
-    "country": "England",
-    "premises": "Tesco House"
-  },
   "accounts": {
-    "next_due": "2024-11-23",
-    "next_made_up_to": "2024-02-24",
-    "overdue": false,
-    "accounting_reference_date": { "day": "24", "month": "02" },
-    "next_accounts": {
-      "due_on": "2024-11-23",
-      "overdue": false,
-      "period_end_on": "2024-02-24"
+    "accounting_reference_date": {
+      "day": "31",
+      "month": "12"
+    },
+    "last_accounts": {
+      "made_up_to": "2014-12-31",
+      "period_end_on": "2014-12-31",
+      "type": "full"
     }
   },
-  "links": { "self": "/company/00445790" }
+  "can_file": false,
+  "company_name": "MARINE AND GENERAL MUTUAL LIFE ASSURANCE SOCIETY",
+  "company_number": "00000006",
+  "company_status": "dissolved",
+  "date_of_cessation": "2018-07-10",
+  "date_of_creation": "1862-10-25",
+  "etag": "0f74ad6c3c366269ac39899e0939851b2ebd15e3",
+  "has_charges": true,
+  "has_insolvency_history": false,
+  "jurisdiction": "england-wales",
+  "last_full_members_list_date": "1986-07-02",
+  "links": {
+    "self": "/company/00000006",
+    "charges": "/company/00000006/charges",
+    "filing_history": "/company/00000006/filing-history",
+    "officers": "/company/00000006/officers"
+  },
+  "registered_office_address": {
+    "address_line_1": "Cms Cameron Mckenna Llp Cannon Place",
+    "address_line_2": "78 Cannon Street",
+    "country": "England",
+    "locality": "London",
+    "postal_code": "EC4N 6AF"
+  },
+  "registered_office_is_in_dispute": false,
+  "sic_codes": [
+    "65110"
+  ],
+  "type": "private-unlimited-nsc",
+  "undeliverable_registered_office_address": false
 }

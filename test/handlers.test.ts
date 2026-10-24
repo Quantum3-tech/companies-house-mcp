@@ -113,11 +113,11 @@ describe("filing history handler", () => {
       { status: 200, body: loadFixture("filing-history.json") },
     ]);
     const result = await tools.filingHistory({
-      company_number: "00445790",
-      category: "accounts",
+      company_number: "00000006",
+      category: "gazette",
     });
     expect(result.ok).toBe(true);
-    if (result.ok) expect(result.data.total_count).toBe(3);
-    expect(calls[0]).toContain("category=accounts");
+    if (result.ok) expect(result.data.total_count).toBe(206);
+    expect(calls[0]).toContain("category=gazette");
   });
 });

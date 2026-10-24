@@ -48,6 +48,20 @@ const DESCRIPTIONS: Record<string, string> = {
   "resolution": "Resolution",
   "change-account-reference-date-company-current-shortened":
     "Accounting reference date shortened",
+  // Codes observed in real responses on 2026-10-24 (companies 00000006 and
+  // 00445790) and added so resolution is genuine, not just prettified.
+  "gazette-dissolved-voluntary":
+    "Final gazette dissolved following voluntary strike-off",
+  "gazette-notice-voluntary":
+    "First gazette notice for voluntary strike-off",
+  "gazette-notice-compulsory":
+    "First gazette notice for compulsory strike-off",
+  "dissolution-application-strike-off-company": "Application to strike off",
+  "termination-director-company-with-name-termination-date":
+    "Termination of appointment of a director",
+  "capital-cancellation-shares": "Cancellation of shares",
+  "capital-return-purchase-own-shares":
+    "Return of purchase of own shares",
 };
 
 /** Turn an unknown enum key into something a human can read. */

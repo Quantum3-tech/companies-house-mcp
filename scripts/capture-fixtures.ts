@@ -34,14 +34,20 @@ async function get(path: string): Promise<unknown> {
 }
 
 async function main(): Promise<void> {
-  // A well-known, long-standing registration used in the CH docs.
-  const number = process.argv[2] ?? "00000006";
+  // 00000006 is a long-standing registration used in the CH docs; it is now
+  // dissolved, which exercises date_of_cessation and the no-upcoming-accounts
+  // path. 00445790 (Tesco PLC) is active, which exercises accounts.next_due
+  // and the live filing description codes.
+  const dissolved = "00000006";
+  const active = "00445790";
 
   const jobs: Array<[string, string]> = [
     ["search-companies.json", "/search/companies?q=tesco&items_per_page=2"],
-    ["company-profile.json", `/company/${number}`],
-    ["officers.json", `/company/${number}/officers?items_per_page=5`],
-    ["filing-history.json", `/company/${number}/filing-history?items_per_page=5`],
+    ["company-profile.json", `/company/${dissolved}`],
+    ["officers.json", `/company/${dissolved}/officers?items_per_page=5`],
+    ["filing-history.json", `/company/${dissolved}/filing-history?items_per_page=5`],
+    ["company-profile-active.json", `/company/${active}`],
+    ["filing-history-active.json", `/company/${active}/filing-history?items_per_page=5`],
   ];
 
   for (const [file, path] of jobs) {

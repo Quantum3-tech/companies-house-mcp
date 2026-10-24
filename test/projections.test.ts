@@ -9,14 +9,17 @@ import {
 import { PROFILE_DATA_NOTE } from "../src/contract/index.js";
 import { loadFixture } from "./helpers.js";
 
+// These fixtures are real responses captured from the live API on 2026-10-24.
+// The assertions below are the actual values that came back.
+
 describe("projectSearch", () => {
   const raw = loadFixture("search-companies.json");
   const result = projectSearch(raw as never, "tesco");
 
-  it("echoes the query and keeps envelope paging fields", () => {
+  it("echoes the query and keeps the envelope paging fields", () => {
     expect(result.query).toBe("tesco");
-    expect(result.total_results).toBe(2);
-    expect(result.items_per_page).toBe(20);
+    expect(result.total_results).toBe(356);
+    expect(result.items_per_page).toBe(2);
     expect(result.start_index).toBe(0);
   });
 
@@ -29,28 +32,33 @@ describe("projectSearch", () => {
       company_type: "plc",
       date_of_creation: "1947-11-27",
       address_snippet:
-        "Tesco House, Shire Park, Kestrel Way, Welwyn Garden City, Hertfordshire, AL7 1GA",
+        "Tesco House, Shire Park, Kestrel Way, Welwyn Garden City, United Kingdom, AL7 1GA",
     });
-    // matches, description, links and the structured address are not carried.
     expect(first).not.toHaveProperty("matches");
     expect(first).not.toHaveProperty("links");
     expect(first).not.toHaveProperty("address");
+    expect(first).not.toHaveProperty("snippet");
+    expect(first).not.toHaveProperty("description");
   });
 });
 
-describe("projectProfile", () => {
+describe("projectProfile, dissolved company 00000006", () => {
   const raw = loadFixture("company-profile.json");
   const result = projectProfile(raw as never);
 
   it("renames upstream `type` to `company_type`", () => {
-    expect(result.company_type).toBe("plc");
+    expect(result.company_type).toBe("private-unlimited-nsc");
     expect(result).not.toHaveProperty("type");
   });
 
-  it("keeps sic_codes and accounts due dates", () => {
-    expect(result.sic_codes).toEqual(["47110", "70100"]);
-    expect(result.accounts?.next_due).toBe("2024-11-23");
-    expect(result.accounts?.overdue).toBe(false);
+  it("carries status, cessation date and sic codes", () => {
+    expect(result.company_status).toBe("dissolved");
+    expect(result.date_of_cessation).toBe("2018-07-10");
+    expect(result.sic_codes).toEqual(["65110"]);
+  });
+
+  it("omits accounts when there are no upcoming accounts", () => {
+    expect(result.accounts).toBeUndefined();
   });
 
   it("drops trimmed fields and includes the boundary note", () => {
@@ -61,44 +69,65 @@ describe("projectProfile", () => {
   });
 });
 
-describe("projectOfficers", () => {
+describe("projectProfile, active company 00445790", () => {
+  const raw = loadFixture("company-profile-active.json");
+  const result = projectProfile(raw as never);
+
+  it("keeps the accounts due dates", () => {
+    expect(result.company_type).toBe("plc");
+    expect(result.accounts?.next_due).toBe("2027-08-26");
+    expect(result.accounts?.next_made_up_to).toBe("2027-02-26");
+    expect(result.accounts?.overdue).toBe(false);
+  });
+
+  it("trims confirmation_statement and previous_company_names", () => {
+    expect(result).not.toHaveProperty("confirmation_statement");
+    expect(result).not.toHaveProperty("previous_company_names");
+  });
+});
+
+describe("projectOfficers, 00000006", () => {
   const raw = loadFixture("officers.json");
-  const result = projectOfficers(raw as never, "00445790");
+  const result = projectOfficers(raw as never, "00000006");
 
-  it("keeps active and resigned counts", () => {
-    expect(result.active_count).toBe(2);
-    expect(result.resigned_count).toBe(1);
-    expect(result.company_number).toBe("00445790");
+  it("keeps the active and resigned counts and the total", () => {
+    expect(result.active_count).toBe(0);
+    expect(result.resigned_count).toBe(49);
+    expect(result.total_results).toBe(52);
+    expect(result.company_number).toBe("00000006");
   });
 
-  it("keeps month-and-year date of birth as given", () => {
-    expect(result.items[0]!.date_of_birth).toEqual({ month: 4, year: 1970 });
+  it("keeps month-and-year date of birth where present", () => {
+    expect(result.items[1]!.name).toBe("GALBRAITH, James");
+    expect(result.items[1]!.date_of_birth).toEqual({ month: 3, year: 1963 });
   });
 
-  it("leaves optional fields absent rather than null", () => {
-    const secretary = result.items[1]!;
-    expect(secretary).not.toHaveProperty("date_of_birth");
-    expect(secretary).not.toHaveProperty("nationality");
+  it("leaves date of birth absent for an officer who has none", () => {
+    expect(result.items[0]!.name).toBe("PRINGLE, Martin");
+    expect(result.items[0]!).not.toHaveProperty("date_of_birth");
   });
 });
 
 describe("projectFilingHistory", () => {
-  const raw = loadFixture("filing-history.json");
-  const result = projectFilingHistory(raw as never, "00445790");
-
-  it("reads the upstream total_count, not total_results", () => {
-    expect(result.total_count).toBe(3);
+  it("reads the upstream total_count, not total_results (00000006)", () => {
+    const raw = loadFixture("filing-history.json");
+    const result = projectFilingHistory(raw as never, "00000006");
+    expect(result.total_count).toBe(206);
+    const first = result.items[0]!;
+    expect(first.description_code).toBe("gazette-dissolved-voluntary");
+    expect(first.description).toBe(
+      "Final gazette dissolved following voluntary strike-off",
+    );
+    expect(first.type).toBe("GAZ2(A)");
   });
 
-  it("resolves a known description code and keeps the original", () => {
-    const accounts = result.items[0]!;
-    expect(accounts.description).toBe("Full accounts");
-    expect(accounts.description_code).toBe("accounts-with-accounts-type-full");
-  });
-
-  it("falls back to a prettified code when unknown, still keeping the key", () => {
-    const unknown = result.items[2]!;
-    expect(unknown.description).toBe("Some code not in our table");
-    expect(unknown.description_code).toBe("some-code-not-in-our-table");
+  it("resolves live capital filing codes (00445790)", () => {
+    const raw = loadFixture("filing-history-active.json");
+    const result = projectFilingHistory(raw as never, "00445790");
+    expect(result.total_count).toBe(8372);
+    const cancellation = result.items.find(
+      (i) => i.description_code === "capital-cancellation-shares",
+    );
+    expect(cancellation?.description).toBe("Cancellation of shares");
   });
 });

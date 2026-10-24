@@ -1,36 +1,80 @@
 {
   "filing_history_status": "filing-history-available",
-  "total_count": 3,
-  "items_per_page": 25,
-  "start_index": 0,
-  "etag": "0011223344",
   "items": [
     {
-      "transaction_id": "MzM4OTk5OTk5OWFkaXF6a2N4",
-      "category": "accounts",
-      "date": "2023-11-20",
-      "type": "AA",
-      "description": "accounts-with-accounts-type-full",
-      "description_values": { "made_up_date": "2023-02-25" },
-      "pages": 48,
-      "paper_filed": false,
-      "links": { "self": "/company/00445790/filing-history/MzM4OTk5OTk5OWFkaXF6a2N4" }
+      "transaction_id": "MzIwODg2ODM4OGFkaXF6a2N4",
+      "type": "GAZ2(A)",
+      "date": "2018-07-10",
+      "category": "gazette",
+      "description": "gazette-dissolved-voluntary",
+      "pages": 1,
+      "paper_filed": true,
+      "links": {
+        "self": "/company/00000006/filing-history/MzIwODg2ODM4OGFkaXF6a2N4",
+        "document_metadata": "https://document-api.company-information.service.gov.uk/document/bg01EDBqES8DV0OAqOokaT4Gw8BnplUI4Nm9c4Mzuww"
+      }
     },
     {
-      "transaction_id": "MzM3MDAwMDAwMGFkaXF6a2N4",
-      "category": "confirmation-statement",
-      "date": "2023-06-14",
-      "type": "CS01",
-      "description": "confirmation-statement-with-updates",
-      "pages": 4
+      "transaction_id": "MzIwMjMwNzAzMmFkaXF6a2N4",
+      "type": "GAZ1(A)",
+      "date": "2018-04-24",
+      "category": "gazette",
+      "description": "gazette-notice-voluntary",
+      "pages": 1,
+      "paper_filed": true,
+      "links": {
+        "self": "/company/00000006/filing-history/MzIwMjMwNzAzMmFkaXF6a2N4",
+        "document_metadata": "https://document-api.company-information.service.gov.uk/document/YFsv7JlBEGYQGnMOSno36V118VH7DnI_1t_PcfqbpYQ"
+      }
     },
     {
-      "transaction_id": "MzM1MDAwMDAwMGFkaXF6a2N4",
+      "transaction_id": "MzIwMTk3MTQ1M2FkaXF6a2N4",
+      "barcode": "A72WY463",
+      "type": "DS01",
+      "date": "2018-04-11",
+      "category": "dissolution",
+      "description": "dissolution-application-strike-off-company",
+      "pages": 3,
+      "paper_filed": true,
+      "links": {
+        "self": "/company/00000006/filing-history/MzIwMTk3MTQ1M2FkaXF6a2N4",
+        "document_metadata": "https://document-api.company-information.service.gov.uk/document/BIBq3MWfF1UkhqXkL2CqN86qGhne3-sbjgh6oP6tnho"
+      }
+    },
+    {
+      "transaction_id": "MzE5ODkwMzY1NmFkaXF6a2N4",
+      "type": "GAZ1",
+      "date": "2018-03-06",
+      "category": "gazette",
+      "description": "gazette-notice-compulsory",
+      "pages": 1,
+      "paper_filed": true,
+      "links": {
+        "self": "/company/00000006/filing-history/MzE5ODkwMzY1NmFkaXF6a2N4",
+        "document_metadata": "https://document-api.company-information.service.gov.uk/document/ZXNOfc4wjZQRHzwur-JiBaVDoHg9l_IId1hSdfxqvkc"
+      }
+    },
+    {
+      "transaction_id": "MzE2OTA2Nzk4OWFkaXF6a2N4",
+      "barcode": "X60CQSIQ",
+      "type": "TM01",
+      "date": "2017-02-17",
       "category": "officers",
-      "date": "2022-10-03",
-      "type": "AP01",
-      "description": "some-code-not-in-our-table",
-      "paper_filed": true
+      "subcategory": "termination",
+      "description": "termination-director-company-with-name-termination-date",
+      "description_values": {
+        "officer_name": "Fiona Catherine Mcbain",
+        "termination_date": "2016-12-31"
+      },
+      "pages": 1,
+      "action_date": "2016-12-31",
+      "links": {
+        "self": "/company/00000006/filing-history/MzE2OTA2Nzk4OWFkaXF6a2N4",
+        "document_metadata": "https://document-api.company-information.service.gov.uk/document/14E1W51NrqimjoSeYuqWIB8zLnavcKFrKdRcKfQGxuU"
+      }
     }
-  ]
+  ],
+  "items_per_page": 5,
+  "start_index": 0,
+  "total_count": 206
 }
