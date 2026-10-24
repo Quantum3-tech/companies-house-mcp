@@ -2,6 +2,7 @@
   "name": "companies-house-mcp",
   "version": "0.1.0",
   "description": "MCP server exposing UK Companies House data to Claude",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "companies-house-mcp": "dist/index.js"

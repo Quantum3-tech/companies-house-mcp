@@ -20,7 +20,8 @@ You need a free API key. Register an application at
 Then:
 
 ```
-npm install && npm run build
+npm install
+npm run build
 ```
 
 Point Claude Desktop at the built server by adding this to its config file
@@ -43,11 +44,12 @@ The key is read from the environment and nowhere else. If it is missing the
 server refuses to start and says why, rather than failing on the first call.
 Restart Claude Desktop and the four tools appear.
 
-## A real session
+## What each tool returns
 
-This is copied from an actual run. I built the server, pointed it at the live
-API, and called each tool through an MCP client. Nothing here is mocked up.
-The requests are the lines beginning `>>>`, the responses follow.
+This is copied from an actual run against the live API. The `>>>` and `<<<`
+layout is a tidied rendering of the MCP client's output, reformatted for
+readability; the request arguments and the response bodies are untouched. The
+requests are the lines beginning `>>>`, the responses follow.
 
 ```
 >>> company_search {"query":"tesco","items_per_page":2}
@@ -171,9 +173,40 @@ without a second call. The two error cases come back as ordinary results the
 model can read, flagged `isError`, each with a `code` it can branch on. And
 the invalid number never reached the API: it was rejected locally.
 
-The numbers are real as of the run: 356 companies match "tesco", Tesco PLC has
-8,372 filings and 74 officer appointments on record, and its accounts are next
-due on 26 August 2027.
+The figures are whatever the register held the day I ran this: 356 companies
+match "tesco", Tesco PLC has 8,372 filings and 74 officer appointments on
+record, and its accounts are next due on 26 August 2027.
+
+## Claude choosing the tools itself
+
+The block above proves the server responds. This proves the contract works. I
+wired the four tools into Claude with nothing else connected and asked a plain
+question. The exchange below is from a headless `claude` run with the server
+attached; I reformatted it, cut the CLI's own internal bookkeeping, and
+shortened the final answer, but the tool calls and the order Claude made them
+in are exactly as they happened.
+
+```
+Me:     Who runs Tesco and when are their next accounts due?
+
+Claude: I'll search Companies House for Tesco, then pull the officers and
+        profile for the right entity.
+          company_search   {"query":"Tesco PLC","items_per_page":10}
+          company_profile  {"company_number":"00445790"}
+          company_officers {"company_number":"00445790","items_per_page":50}
+
+Claude: Tesco PLC (00445790) is active, registered at Tesco House, Welwyn
+        Garden City. Its next accounts are due 26 August 2027, made up to
+        26 February 2027, not overdue. The register lists 11 active officers,
+        among them Ken Murphy (director, appointed 1 October 2020) and
+        Christopher Taylor (secretary, appointed 14 April 2025), and 63
+        resigned.
+```
+
+Claude was never given the company number. It searched, read `company_status`
+and `company_type` off the search result to settle on 00445790 out of 356
+matches, and chained into profile and officers without being told to. That is
+the search-carries-enough-to-decide design doing the job it exists for.
 
 ## The contract, and why it looks like this
 
@@ -250,3 +283,7 @@ the network. The fixtures were taken from companies 00000006 (dissolved) and
 covered by real data. `npm run test:live` adds three tests that hit the real
 API, and is skipped unless you set a key. `npm run capture` regenerates the
 fixtures from live responses.
+
+## Licence
+
+MIT. See `LICENSE`.

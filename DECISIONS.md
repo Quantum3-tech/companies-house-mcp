@@ -153,3 +153,23 @@ calls during a single line of questioning without serving stale data in any way
 a user would notice. I left search uncached because queries vary too much to
 hit, and filing history uncached because it is the one a user is most likely to
 re-run expecting a just-filed document to appear.
+
+## The profile carries data_note as well as listing fields in its description
+
+The boundary is stated twice: the profile tool description lists the fields it
+returns, and every profile response also carries a `data_note` saying absence
+means not-fetched.
+
+Rejected: the description alone, with no note in the response.
+
+This is a real cost. The note is perhaps fifty tokens on every profile call,
+for a message the model has in principle already read in the tool description.
+I kept it anyway because the two land at different moments. The description is
+read once, when the model decides which tool to call. The note sits beside the
+data at the moment the model is reasoning about what the data means, which is
+exactly when "there is no has_charges here" could be misread as "has_charges is
+false". The failure I am guarding against happens at read time, not at
+call-selection time, so the guard belongs in the response. If profiles were
+fetched in bulk the arithmetic would change and I would drop it; for one
+profile per question it is worth the tokens. It is only on the profile, not on
+the list tools, because the list tools have no false-versus-absent ambiguity.
