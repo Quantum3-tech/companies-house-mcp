@@ -6,9 +6,13 @@ An MCP server exposing UK Companies House data to Claude.
 
 These hold for every change. They are not suggestions.
 
-1. **Read `WRITING_RULES.md` before writing or editing any Markdown file.**
-   Re-read it immediately before committing a doc change. The README is part
-   of the product here, not an afterthought.
+1. **Every Markdown file follows these writing rules.** Plain British
+   English, first person singular, no emoji, no em dashes. Say what the thing
+   does not do and what I would change with more time. Every number comes from
+   a run that actually happened. No Features, Contributing or Roadmap sections.
+   Cut any sentence that would survive a find-and-replace of the project name.
+   Re-read this list immediately before committing a doc change. The README is
+   part of the product here, not an afterthought.
 
 2. **Read the live Companies House API docs before implementing any endpoint.**
    Do not implement from memory or assumption. The reference is at
@@ -29,8 +33,9 @@ These hold for every change. They are not suggestions.
 6. **No secrets in the repo.** The API key comes from the environment. There
    is a `.env.example` with the variable names and no values.
 
-7. **Commit after each working increment**, with a message in the house style
-   (see `WRITING_RULES.md`). Do not batch a day's work into one commit.
+7. **Commit after each working increment.** Messages are imperative, lower
+   case, no trailing full stop, and say what changed and why rather than which
+   file was touched. Do not batch a day's work into one commit.
 
 ## What this is
 
@@ -71,5 +76,5 @@ option that was rejected and why.
 - Tests covering the tool handlers and the error paths, running without network.
 - `DECISIONS.md` with at least four real decisions, each with the rejected
   alternative.
-- A README that follows `WRITING_RULES.md`, including a real transcript of
+- A README that follows the writing rules above, including a real transcript of
   Claude using the server and a section on what it does not do.
